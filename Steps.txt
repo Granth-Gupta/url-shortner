@@ -113,13 +113,10 @@ device text
 - Git commit 
   cd "C:\Users\Granth\Desktop\MyProject"     # 🔁 Change to your project directory
 
+  git remote remove origin
   git add .                                   # ➕ Stage all files for commit
   git commit -m "Initial commit"              # ✅ Commit your files
   git branch -M main                          # 🛠 Rename current branch to main
   git init                                    # 🟡 Initialize Git in this folder
-  git remote add origin https://github.com/Granth-Gupta/Local-Ai-Agent.git  # 🔗 Link to GitHub repo
+  git remote add origin https://github.com/piyush-eon/url-shortener.git  # 🔗 Link to GitHub repo
   git push -u origin main                     # 🚀 Push to GitHub
-
-
-
-"./src/**/*.{js,ts,jsx,tsx}"
