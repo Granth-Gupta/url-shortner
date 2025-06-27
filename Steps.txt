@@ -1,0 +1,133 @@
+https://www.youtube.com/watch?v=geIwBIuo-ug&list=PLKhlp2qtUcSZBJxjXbHBkE_3h5E31dDiu
+
+npm install -g create-vite
+npm fund
+
+npm create vite@latest
+.
+url_shortner
+select react
+select javascript
+
+npm i (for installing all dependencies from package.json)
+
+- Empty index.css and App.css
+- Remove useless code from App.jsx
+- Go to ui.shadcn.com installation
+- vite 
+    npm install tailwindcss @tailwindcss/vite (since shadcn library is build on tailwindcss)
+    npx tailwindcss init (to create tailwindcss config file)
+    Create jsconfig.app.json instead of tsconfig.json (since we are not using typrScript)
+        {
+            "compilerOptions": {
+              // ...
+              "baseUrl": ".",
+              "paths": {
+                "@/*": [
+                  "./src/*"
+                ]
+              }
+              // ...
+            }
+        }
+
+    create jsconfig.json    
+        {
+            "files": [],
+            "references": [
+              {
+                "path": "./jsconfig.app.json"
+              },
+              {
+                "path": "./jsconfig.node.json"
+              }
+            ],
+            "compilerOptions": {
+              "baseUrl": ".",
+              "paths": {
+                "@/*": ["./src/*"]
+              }
+            }
+        }
+
+- In vite.config.js 
+    import path from "path";
+    import tailwindcss from "@tailwindcss/vite";
+    import react from "@vitejs/plugin-react";
+    import { defineConfig } from "vite";
+
+    // https://vite.dev/config/
+    export default defineConfig({
+        plugins: [react(), tailwindcss()],
+            resolve: {
+            alias: {
+                "@": path.resolve(__dirname, "./src"),
+            },
+        },
+    });
+
+- npx shadcn@latest init
+    Which color would you like to use as the base color? » Slate
+- npm run dev
+
+---------------------------------------------------------
+For this Project
+
+- Make a new supabase organization and then a new project url_shortner
+- create .env in lib folder 
+  VITE_...=API Key (like VITE_SUPABASE_KEY=...)
+  VITE_...=Project URL (like VITE_SUPABASE_URL=...)
+
+- In supabase project 
+  connect > App Frameworks > react > Vite > utils/supabase.ts
+  copy code to clipboard
+
+- In src create db folder 
+  create supabase.js (paste code here)
+  npm i @supabase/supabase-js
+
+- Create urls table in supabase
+original_url text NULL
+short_url text NULL
+custom_url text NULL  (set unique)
+user_id uuid NULL (auth > user > uuid = id > save)
+title text NULL
+qr text NULL
+
+- Create clicks table
+url_id 
+  public > urls > url_id = id > cascade > save
+city text
+country text
+device text
+
+- npm i react-router-dom
+- src/layouts/app-layout.jsx
+  rafce + enter
+
+- Add routing in App.jsx
+  import { createBrowserRouter } from "react-router-dom";
+  import AppLayout from "./layouts/app-layout";
+
+  const router = createBrowserRouter([
+    {
+      element: <AppLayout />,
+      children: [
+        {
+        path: "/",
+        element: <LandingPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },   ... and more pages route
+      ],
+    },
+  ]);
+
+- Create pages jsx files (Click rafce in each empty file)
+- Replace {/*body*/} in app-layout.jsx with 
+  <Outlet /> for rendering pages inside AppLayout
+
+ 
+
