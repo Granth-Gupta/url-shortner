@@ -15,9 +15,9 @@ npm i (for installing all dependencies from package.json)
 - Remove useless code from App.jsx
 - Go to ui.shadcn.com installation
 - vite 
-    npm install tailwindcss @tailwindcss/vite (since shadcn library is build on tailwindcss)
+    npm install -D tailwindcss@^3.0.0 postcss autoprefixer (since shadcn library is build on tailwindcss)
     npx tailwindcss init (to create tailwindcss config file)
-    Create jsconfig.app.json instead of tsconfig.json (since we are not using typrScript)
+    Create jsconfig.json instead of tsconfig.json (since we are not using typrScript)
         {
             "compilerOptions": {
               // ...
@@ -31,25 +31,6 @@ npm i (for installing all dependencies from package.json)
             }
         }
 
-    create jsconfig.json    
-        {
-            "files": [],
-            "references": [
-              {
-                "path": "./jsconfig.app.json"
-              },
-              {
-                "path": "./jsconfig.node.json"
-              }
-            ],
-            "compilerOptions": {
-              "baseUrl": ".",
-              "paths": {
-                "@/*": ["./src/*"]
-              }
-            }
-        }
-
 - In vite.config.js 
     import path from "path";
     import tailwindcss from "@tailwindcss/vite";
@@ -58,7 +39,7 @@ npm i (for installing all dependencies from package.json)
 
     // https://vite.dev/config/
     export default defineConfig({
-        plugins: [react(), tailwindcss()],
+        plugins: [react()],
             resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src"),
@@ -66,7 +47,7 @@ npm i (for installing all dependencies from package.json)
         },
     });
 
-- npx shadcn@latest init
+- npx shadcn-ui@latest init
     Which color would you like to use as the base color? » Slate
 - npm run dev
 
@@ -129,5 +110,16 @@ device text
 - Replace {/*body*/} in app-layout.jsx with 
   <Outlet /> for rendering pages inside AppLayout
 
- 
+- Git commit 
+  cd "C:\Users\Granth\Desktop\MyProject"     # 🔁 Change to your project directory
 
+  git add .                                   # ➕ Stage all files for commit
+  git commit -m "Initial commit"              # ✅ Commit your files
+  git branch -M main                          # 🛠 Rename current branch to main
+  git init                                    # 🟡 Initialize Git in this folder
+  git remote add origin https://github.com/Granth-Gupta/Local-Ai-Agent.git  # 🔗 Link to GitHub repo
+  git push -u origin main                     # 🚀 Push to GitHub
+
+
+
+"./src/**/*.{js,ts,jsx,tsx}"

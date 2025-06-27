@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 
 const AppLayout = () => {
@@ -9,7 +8,9 @@ const AppLayout = () => {
         <Outlet />
       </main>
 
-      <div>Made with ❤️ by Granth</div>
+      <div className="p-10 text-center by-gray-800 mt-10">
+        Made with ❤️ by Granth
+      </div>
     </div>
   );
 };
