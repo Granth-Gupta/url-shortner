@@ -118,5 +118,9 @@ device text
   git commit -m "Initial commit"              # ✅ Commit your files
   git branch -M main                          # 🛠 Rename current branch to main
   git init                                    # 🟡 Initialize Git in this folder
-  git remote add origin https://github.com/piyush-eon/url-shortener.git  # 🔗 Link to GitHub repo
+  git remote add origin https://github.com/Granth-Gupta/url-shortner.git  # 🔗 Link to GitHub repo
   git push -u origin main                     # 🚀 Push to GitHub
+
+- Merge dark mode and root in index.css
+
+- npm i react-spinners yup
