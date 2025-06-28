@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { UrlState } from "@/context";
-import { BarLoader } from "react-spinners";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import {UrlState} from "@/context";
+import {BarLoader} from "react-spinners";
 
-function RequireAuth({ children }) {
+function RequireAuth({children}) {
   const navigate = useNavigate();
 
-  const { loading, isAuthenticated } = UrlState();
+  const {loading, isAuthenticated} = UrlState();
 
   useEffect(() => {
     if (!isAuthenticated && loading === false) navigate("/auth");

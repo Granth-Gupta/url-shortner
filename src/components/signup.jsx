@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Error from "./error";
-import { Input } from "./ui/input";
+import {Input} from "./ui/input";
 import * as Yup from "yup";
 import {
   Card,
@@ -10,19 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Button } from "./ui/button";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { signup } from "@/db/apiAuth";
-import { BeatLoader } from "react-spinners";
+import {Button} from "./ui/button";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {signup} from "@/db/apiAuth";
+import {BeatLoader} from "react-spinners";
 import useFetch from "@/hooks/use-fetch";
-import { useRef } from "react"; // At the top of your file
 
 const Signup = () => {
   let [searchParams] = useSearchParams();
   const longLink = searchParams.get("createNew");
-
-  const [fileName, setFileName] = useState("No file chosen");
-  const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -35,21 +31,14 @@ const Signup = () => {
   });
 
   const handleInputChange = (e) => {
-    const { name, value, files } = e.target;
+    const {name, value, files} = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: files ? files[0] : value,
     }));
-    // Update file name state if a file is selected
-    if (name === "profile_pic" && files && files[0]) {
-      setFileName(files[0].name);
-    } else if (name === "profile_pic" && !files?.length) {
-      // Handle case where user cancels file selection
-      setFileName("No file chosen");
-    }
   };
 
-  const { loading, error, fn: fnSignup, data } = useFetch(signup, formData);
+  const {loading, error, fn: fnSignup, data} = useFetch(signup, formData);
 
   useEffect(() => {
     if (error === null && data) {
@@ -72,7 +61,7 @@ const Signup = () => {
         profile_pic: Yup.mixed().required("Profile picture is required"),
       });
 
-      await schema.validate(formData, { abortEarly: false });
+      await schema.validate(formData, {abortEarly: false});
       await fnSignup();
     } catch (error) {
       const newErrors = {};
@@ -83,13 +72,9 @@ const Signup = () => {
 
         setErrors(newErrors);
       } else {
-        setErrors({ api: error.message });
+        setErrors({api: error.message});
       }
     }
-  };
-
-  const handleFileButtonClick = () => {
-    fileInputRef.current.click();
   };
 
   return (
@@ -135,25 +120,7 @@ const Signup = () => {
             type="file"
             accept="image/*"
             onChange={handleInputChange}
-            ref={fileInputRef}
-            style={{ display: "none" }}
           />
-          {/* Custom styled button */}
-          <div className="flex items-center gap-2">
-            {" "}
-            {/* Use flex to align button and text */}
-            <Button
-              type="button" // Important: Prevents form submission
-              onClick={handleFileButtonClick}
-            >
-              Choose File
-            </Button>
-            <span className="text-sm text-gray-400">
-              {" "}
-              {/* Style the file name text */}
-              {fileName}
-            </span>
-          </div>
         </div>
         {errors.profile_pic && <Error message={errors.profile_pic} />}
       </CardContent>
